@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AllyRoster : MonoBehaviour {
 
-	public static GameObject[] Allies;
+	public GameObject[] Allies;
 
 	// Use this for initialization
 	void Start () {

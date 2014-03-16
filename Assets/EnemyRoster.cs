@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyRoster : MonoBehaviour {
 
-	public static GameObject[] Enemies;
+	public GameObject[] Enemies;
 
 	// Use this for initialization
 	void Start () {
