@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	 * 2 - right front
 	 * 3 - right rear
 	 */
+	public Transform[] wheelModels;
 	public float maxSpeed;
 	public static bool isMoving;
 	public float maxTorqueSpeed;
@@ -43,6 +44,9 @@ public class PlayerController : MonoBehaviour {
 		wheels[1].motorTorque += steer;
 		wheels[2].motorTorque -= steer;
 		wheels[3].motorTorque -= steer;
+		foreach(Transform wheel in wheelModels){
+			wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
+		}
 
 	}
 

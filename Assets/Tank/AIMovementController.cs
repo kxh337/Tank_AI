@@ -10,6 +10,7 @@ public class AIMovementController : MonoBehaviour {
 	 * 2 - right front
 	 * 3 - right rear
 	 */
+	public Transform[] wheelModels;
 	private bool isMoving;
 	public float maxTorqueSpeed;
 	public float maxTurnSpeed;
@@ -24,6 +25,8 @@ public class AIMovementController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		foreach(Transform wheel in wheelModels){
+			wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
+		}
 	}
 }
