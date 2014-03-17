@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	 * 2 - right front
 	 * 3 - right rear
 	 */
-
+	public float maxSpeed;
 	public static bool isMoving;
 	public float maxTorqueSpeed;
 	public float maxTurnSpeed;
@@ -31,23 +31,18 @@ public class PlayerController : MonoBehaviour {
 		else{
 			isMoving = false;
 		}
+		if(rigidbody.velocity.magnitude > maxSpeed){
+			rigidbody.velocity *= maxSpeed / rigidbody.velocity.magnitude;
+		}
 		float power = Input.GetAxis("Vertical") * maxTorqueSpeed * Time.deltaTime * 250;
 		float steer = Input.GetAxis("Horizontal") * maxTurnSpeed;
 		foreach(WheelCollider w in wheels){
 			w.motorTorque = power;
 		}
-		if(power > 0){
-			wheels[0].motorTorque += steer;
-			wheels[1].motorTorque += steer;
-			wheels[2].motorTorque -= steer;
-			wheels[3].motorTorque -= steer;
-		}
-		else{
-			wheels[0].motorTorque -= steer;
-			wheels[1].motorTorque -= steer;
-			wheels[2].motorTorque += steer;
-			wheels[3].motorTorque += steer;
-		}
+		wheels[0].motorTorque += steer;
+		wheels[1].motorTorque += steer;
+		wheels[2].motorTorque -= steer;
+		wheels[3].motorTorque -= steer;
 
 	}
 
