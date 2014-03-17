@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		isMoving = false;
 		foreach(WheelCollider w in wheels){
-			w.brakeTorque = 0;
+			w.brakeTorque = 0; 	
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 		foreach(WheelCollider w in wheels){
 			w.motorTorque = power;
 		}
-		if(steer > 0){
+		if(power > 0){
 			wheels[0].motorTorque += steer;
 			wheels[1].motorTorque += steer;
 			wheels[2].motorTorque -= steer;
