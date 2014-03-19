@@ -15,7 +15,7 @@ public class SightTrigger : MonoBehaviour {
 	
 	}
 	void OnTriggerEnter(Collider other) {
-		if (this.gameObject.tag == "Enemy") {
+		if (Tank.gameObject.tag == "Enemy") {
 			if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally")) {
 				if (EnemyCount == 0)
 					Tank.target = other.gameObject;
@@ -24,7 +24,7 @@ public class SightTrigger : MonoBehaviour {
 				Debug.Log("Enemy Sees You");
 			}
 		}
-		if (this.gameObject.tag == "Ally") {
+		if (Tank.gameObject.tag == "Ally") {
 			if (other.gameObject.CompareTag ("Enemy")) {
 				if (EnemyCount == 0)
 					Tank.target = other.gameObject;
@@ -35,7 +35,7 @@ public class SightTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-		if (this.gameObject.tag == "Enemy") {
+		if (Tank.gameObject.tag == "Enemy") {
 			if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally")) {
 				EnemyCount--;
 				if (EnemyCount == 0){
@@ -46,7 +46,7 @@ public class SightTrigger : MonoBehaviour {
 					Debug.Log("Enemy Can still see ally");
 			}
 		}
-		if (this.gameObject.tag == "Ally") {
+		if (Tank.gameObject.tag == "Ally") {
 			if (other.gameObject.CompareTag ("Enemy")) {
 				EnemyCount--;
 				if (EnemyCount == 0)
