@@ -21,7 +21,7 @@ public class SightTrigger : MonoBehaviour {
 					Tank.target = other.gameObject;
 				EnemyCount++;
 				Tank.sighted = true;
-				Debug.Log("Enemy Sees You");
+				Debug.Log("Enemies seen:" + EnemyCount);
 			}
 		}
 		if (Tank.gameObject.tag == "Ally") {
@@ -40,10 +40,10 @@ public class SightTrigger : MonoBehaviour {
 				EnemyCount--;
 				if (EnemyCount == 0){
 					Tank.sighted = false;
-					Debug.Log("Enemy sees someone");
+					Debug.Log("Enemy sees Noone");
 				}
 				if (EnemyCount > 0)
-					Debug.Log("Enemy Can still see ally");
+					Debug.Log("Enemies seen:" + EnemyCount);
 			}
 		}
 		if (Tank.gameObject.tag == "Ally") {
