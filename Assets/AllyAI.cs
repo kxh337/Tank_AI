@@ -4,7 +4,7 @@ using System.Collections;
 public class AllyAI : MonoBehaviour {
 
 	private int Health = 100;
-	private int range = 50;
+	private double range = 2.5;
 	public GameObject target;
 	private GameObject[] Enemies;
 	public GameObject[] Wheels; // 0 and 1 should be front, 2 and 3 back.
@@ -23,20 +23,35 @@ public class AllyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Health < 35) {
+			lowHealth = true;
+		}
 		if (!sighted) {
 			// wander	
 			// Enemy is seen in the SightTrigger script
 		}
-		if (sighted && !lowHealth) {
+		else if (sighted && !lowHealth) {
+			Vector3 amttorotate;
+			amttorotate = Vector3.RotateTowards (Turret.transform.forward, target.transform.position - Turret.transform.position, .01f, .01f);	
+			Turret.transform.rotation = Quaternion.LookRotation (new Vector3 (amttorotate.x, 0f, amttorotate.z), new Vector3 (0f, 1f, 0f));
 			if (inRange){
 				// attack
+				if (Vector3.Distance(this.gameObject.transform.position, this.target.transform.position) > range){
+					inRange = false;
+				}
 			}
 			else  {
 				// follow/set inRange if it becomes true
+				if (Vector3.Distance(this.gameObject.transform.position, this.target.transform.position) < range){
+					inRange = true;
+				}
 			}
 		}
-		if (lowHealth && sighted) {
-			// flee		
+		else if (lowHealth && sighted) {
+			Vector3 amttorotate;
+			amttorotate = Vector3.RotateTowards (transform.forward, - target.transform.position, .01f, .01f);	
+			transform.rotation = Quaternion.LookRotation (new Vector3 (amttorotate.x, 0f, amttorotate.z), new Vector3 (0f, 1f, 0f));
+			// flee, maybe shoot during?		
 		}
 	}
 }
