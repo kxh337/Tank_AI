@@ -2,41 +2,41 @@
 using System.Collections;
 
 public class FloatingHealthBar : MonoBehaviour {
-	public GameObject GreenBarPrefab;
-	public GameObject RedBarPrefab;
+	public GameObject greenBar;
+	public GameObject redBar;
 
-	public Vector3 pos;
 	private float currentXPosition;
 
-	public int currHealth = 100;
-	public int damage = -1;
-	private int maxHealth = 100;
+	public float currHealth;
+	private float maxHealth;
+	private float temp;
 
 
 
 	// Use this for initialization
 	void Start () {
-		currentXPosition = GreenBarPrefab.transform.position.x;
+		currentXPosition = greenBar.transform.position.x;
+		currHealth = 100f;
+		maxHealth = 100f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		gameObject.transform.LookAt(Camera.main.transform.position);
-		health (0);
+		//test - gives 10 damage with every left click
+		/*if(Input.GetMouseButtonDown(0)){
+			health (-10);
+			Debug.Log("Gave 10 Damage");
+		}*/
 	}
 	
 	void health(int adj) {
-		currHealth = 50;
-
-		/*GreenBarPrefab.transform.position = new Vector3 (currentXPosition * 0.5f - 0.5f,
-		                                                 GreenBarPrefab.transform.position.y,
-		                                                 GreenBarPrefab.transform.position.z);*/
-
-		currentXPosition = GreenBarPrefab.transform.position.x;
-
-		GreenBarPrefab.transform.localScale = new Vector3(currHealth/(float)100,
-		                                                  GreenBarPrefab.transform.localScale.y,
-		                                                  GreenBarPrefab.transform.localScale.z);
+		temp = currHealth;
+		currHealth += adj;
+		greenBar.transform.Translate((adj/200f),0,0);
+		greenBar.transform.localScale = new Vector3((currHealth)/100f,
+		                                                  greenBar.transform.localScale.y,
+		                                                  greenBar.transform.localScale.z);
 		
 	}
 
