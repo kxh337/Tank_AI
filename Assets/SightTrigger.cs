@@ -5,20 +5,24 @@ public class SightTrigger : MonoBehaviour {
 	private int EnemyCount = 0;
 	public AllyAI Tank;
 
+	public AudioClip enemySeePlayer;
+	
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
+	
 	void OnTriggerEnter(Collider other) {
 		if (Tank.gameObject.tag == "Enemy") {
 			if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally")) {
-				if (EnemyCount == 0 || other.gameObject.CompareTag("Player"))
+				if (EnemyCount == 0 || other.gameObject.CompareTag("Player")) {
 					Tank.target = other.gameObject;
+					if (other.gameObject.CompareTag("Player")) audio.PlayOneShot(enemySeePlayer);
+				}
 				EnemyCount++;
 				Tank.sighted = true;
 				Debug.Log("Enemies seen:" + EnemyCount);
@@ -33,7 +37,7 @@ public class SightTrigger : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	void OnTriggerExit(Collider other) {
 		if (Tank.gameObject.tag == "Enemy") {
 			if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally")) {
