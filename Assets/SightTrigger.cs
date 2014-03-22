@@ -63,8 +63,22 @@ public class SightTrigger : MonoBehaviour {
 		if (Tank.gameObject.tag == "Ally") {
 			if (other.gameObject.CompareTag ("Enemy")) {
 				EnemyCount--;
-				if (EnemyCount == 0)
+				if (EnemyCount == 0){
 					Tank.sighted = false;
+					Debug.Log("Enemy sees Noone");
+				}
+				if (EnemyCount > 0){
+					Debug.Log("Enemies seen:" + EnemyCount);
+				}
+				if (other.gameObject == Tank.target) {
+					ArrayList enemies = new ArrayList(GameObject.FindGameObjectsWithTag("Enemy"));
+					if (enemies.Count != 0){
+						foreach (GameObject x in enemies) {
+							if (Vector3.Distance(Tank.gameObject.transform.position, x.gameObject.transform.position) < 5)
+								Tank.target = x;
+						}
+					}
+				}
 			}
 		}
 	}
