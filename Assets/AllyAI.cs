@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class AllyAI : MonoBehaviour {
-
+	public FloatingHealthBar bar;
 	private int Health = 100;
 	private double range = 2.5;
 	public GameObject target;
@@ -11,6 +11,7 @@ public class AllyAI : MonoBehaviour {
 	public GameObject Projectile;
 	public GameObject Barrel;
 	public GameObject Turret;
+	public Vector3 projectileStartPos;
 
 	public bool sighted = false;
 	public bool lowHealth = false;
@@ -39,6 +40,8 @@ public class AllyAI : MonoBehaviour {
 				if (Vector3.Distance(this.gameObject.transform.position, this.target.transform.position) > range){
 					inRange = false;
 				}
+
+
 			}
 			else  {
 				// follow/set inRange if it becomes true
@@ -53,5 +56,6 @@ public class AllyAI : MonoBehaviour {
 			transform.rotation = Quaternion.LookRotation (new Vector3 (amttorotate.x, 0f, amttorotate.z), new Vector3 (0f, 1f, 0f));
 			// flee, maybe shoot during?		
 		}
+
 	}
 }

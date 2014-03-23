@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 4b2eb6fa70a05734c866bd11c17a8827
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bar: {fileID: 11400000, guid: 501f0d627e8814b26b4252e6dda4ea41, type: 2}
+  - target: {instanceID: 0}
+  - Projectile: {instanceID: 0}
+  - Barrel: {instanceID: 0}
+  - Turret: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
