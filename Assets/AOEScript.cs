@@ -17,7 +17,7 @@ public class AOEScript : MonoBehaviour {
 	
 	public void Explode() {
 		foreach (AllyAI x in inArea) {
-			x.takeDamage (100);
+			x.takeDamage (15);
 		}
 	}
 	
