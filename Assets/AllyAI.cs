@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class AllyAI : MonoBehaviour {
-
+	public GameObject parentTank;
 	private int Health = 100;
 	private double range = 2.5;
 	public GameObject target;
@@ -26,7 +26,7 @@ public class AllyAI : MonoBehaviour {
 		Health -= damage;
 		healthBar.health(-damage);
 		if (Health <= 0) {
-			Destroy(this.gameObject);		
+			Destroy(parentTank);		
 		}
 	}
 	
