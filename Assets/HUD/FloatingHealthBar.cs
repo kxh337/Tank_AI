@@ -36,7 +36,7 @@ public class FloatingHealthBar : MonoBehaviour {
 	}
 
 	// use negative number for damage amount!
-	void health(int adj) {
+	public void health(int adj) {
 		currentHealth += adj;
 		if (currentHealth <= 0) {
 			currentHealth = 0;
