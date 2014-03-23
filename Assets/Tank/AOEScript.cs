@@ -16,20 +16,20 @@ public class AOEScript : MonoBehaviour {
 	}
 
 	public void Explode() {
-		foreach (GameObject x in inArea) {
-			x.GetComponent<AllyAI>().takeDamage(100);
-		}
+			foreach (AllyAI x in inArea) {
+					x.takeDamage (100);
+			}
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally") || other.gameObject.CompareTag ("Enemy")) {
-			inArea.Add (other.gameObject);
+			inArea.Add (other.gameObject.GetComponent<AllyAI> ());
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally") || other.gameObject.CompareTag ("Enemy")) {
-			inArea.Remove (other.gameObject);
+			inArea.Remove (other.gameObject.GetComponent<AllyAI> ());
 		}
 	}
 }
