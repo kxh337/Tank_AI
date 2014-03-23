@@ -12,8 +12,8 @@ public class AIMovementController : MonoBehaviour {
 	 */
 	public Transform[] wheelModels;
 	private bool isMoving;
-	public float maxTorqueSpeed;
-	public float maxTurnSpeed;
+	public float torque;
+	public float steer;
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +25,55 @@ public class AIMovementController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach(Transform wheel in wheelModels){
-			wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
+		if(rigidbody.velocity > 0){
+			isMoving = true;
+		}
+		else{
+			isMoving = falst;
+		}
+		if(isMoving == true){
+			foreach(Transform wheel in wheelModels){
+				wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
+			}
+		}
+	}
+
+	public void moveForward(float time){
+		float nextTime = Time.time + time;
+		while(Time.time < nextTime){
+			foreach(WheelCollider w in wheels){
+				w.motorTorque = torque;
+			}
+		}
+	}
+
+	public void turnLeft(float time){
+		float nextTime = Time.time + time;
+		while(Time.time < nextTime){
+			wheels[0].motorTorque += steer;
+			wheels[1].motorTorque += steer;
+			wheels[2].motorTorque += steer;
+			wheels[3].motorTorque += steer;
+		}
+	}
+
+	public void turnRight(float time){
+		float nextTime = Time.time + time;
+		while(Time.time < nextTime){
+			wheels[0].motorTorque += steer;
+			wheels[1].motorTorque += steer;
+			wheels[2].motorTorque -= steer;
+			wheels[3].motorTorque -= steer;
+		}
+	}
+
+
+	public void moveBackwards(float time){
+		float nextTime = Time.time + time;
+		while(Time.time < nextTime){
+			foreach(WheelCollider w in wheels){
+				w.motorTorque = -torque;
+			}
 		}
 	}
 }

@@ -17,7 +17,7 @@ public class AOEScript : MonoBehaviour {
 
 	public void Explode() {
 		foreach (GameObject x in inArea) {
-			x.GetComponent<AllyAI>().takeDamage(100);
+			//x.GetComponent<AllyAI>().takeDamage(100);
 		}
 	}
 

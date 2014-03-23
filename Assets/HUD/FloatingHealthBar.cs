@@ -4,7 +4,7 @@ using System.Collections;
 public class FloatingHealthBar : MonoBehaviour {
 	public GameObject greenBar;
 	public GameObject redBar;
-	
+
 	public float currentHealth;
 	private float maxHealth;
 	private float temp;
@@ -36,7 +36,7 @@ public class FloatingHealthBar : MonoBehaviour {
 	}
 
 	// use negative number for damage amount!
-	void health(int adj) {
+	public void health(int adj) {
 		currentHealth += adj;
 		if (currentHealth <= 0) {
 			currentHealth = 0;
