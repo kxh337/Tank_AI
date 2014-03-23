@@ -21,8 +21,6 @@ public class SightTrigger : MonoBehaviour {
 			if (other.gameObject.CompareTag ("Player") || other.gameObject.CompareTag ("Ally")) {
 				if (EnemyCount == 0 || other.gameObject.CompareTag("Player")) {
 					Tank.target = other.gameObject;
-
-
 					if (other.gameObject.CompareTag("Player")) audio.PlayOneShot(enemySeePlayer);
 				}
 				EnemyCount++;
