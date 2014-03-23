@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: 5477620bb70457e4fb971f9a2381e596
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Tank: {instanceID: 0}
+  - enemySeePlayer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
