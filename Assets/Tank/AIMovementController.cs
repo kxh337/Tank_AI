@@ -14,6 +14,9 @@ public class AIMovementController : MonoBehaviour {
 	private bool isMoving;
 	public float torque;
 	public float steer;
+	public float turnTorque;
+	public float maxSpeed;
+	private float stopTime;
 
 	// Use this for initialization
 	void Start () {
@@ -21,59 +24,69 @@ public class AIMovementController : MonoBehaviour {
 		foreach(WheelCollider w in wheels){
 			w.brakeTorque = 0; 	
 		}
+		turnLeft(5);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(rigidbody.velocity > 0){
+		if(rigidbody.velocity.magnitude > 0){
 			isMoving = true;
 		}
 		else{
-			isMoving = falst;
+			isMoving = false;
+		}
+		if(rigidbody.velocity.magnitude > maxSpeed){
+			rigidbody.velocity *= maxSpeed / rigidbody.velocity.magnitude;
 		}
 		if(isMoving == true){
 			foreach(Transform wheel in wheelModels){
 				wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
 			}
 		}
+		if(Time.time > stopTime){
+			wheels[0].steerAngle = 0;
+			wheels[2].steerAngle = 0;
+			foreach(WheelCollider w in wheels){
+				w.motorTorque = 0;
+			}
+		}
+
 	}
 
 	public void moveForward(float time){
-		float nextTime = Time.time + time;
-		while(Time.time < nextTime){
+		stopTime = Time.time + time;
 			foreach(WheelCollider w in wheels){
 				w.motorTorque = torque;
 			}
-		}
 	}
 
 	public void turnLeft(float time){
-		float nextTime = Time.time + time;
-		while(Time.time < nextTime){
-			wheels[0].motorTorque += steer;
-			wheels[1].motorTorque += steer;
-			wheels[2].motorTorque += steer;
-			wheels[3].motorTorque += steer;
+		stopTime = Time.time + time;
+		wheels[0].steerAngle = -steer;
+		//wheels[1].motorTorque -= steer;
+		wheels[2].steerAngle = -steer;
+		//wheels[3].motorTorque += steer;
+		foreach(WheelCollider w in wheels){
+			w.motorTorque = turnTorque;
 		}
 	}
-
 	public void turnRight(float time){
-		float nextTime = Time.time + time;
-		while(Time.time < nextTime){
-			wheels[0].motorTorque += steer;
-			wheels[1].motorTorque += steer;
-			wheels[2].motorTorque -= steer;
-			wheels[3].motorTorque -= steer;
+		stopTime = Time.time + time;
+		wheels[0].steerAngle = steer;
+		//wheels[1].motorTorque += steer;
+		wheels[2].steerAngle = steer;
+		//wheels[3].motorTorque -= steer;	
+		foreach(WheelCollider w in wheels){
+				w.motorTorque = turnTorque;
 		}
 	}
 
 
 	public void moveBackwards(float time){
-		float nextTime = Time.time + time;
-		while(Time.time < nextTime){
-			foreach(WheelCollider w in wheels){
-				w.motorTorque = -torque;
-			}
+		stopTime = Time.time + time;
+		foreach(WheelCollider w in wheels){
+			w.motorTorque = -torque;
 		}
 	}
 }
