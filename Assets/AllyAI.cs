@@ -30,6 +30,8 @@ public class AllyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (target == null)
+			sighted = false;
 		if (Health < 35) {
 			lowHealth = true;
 		}
