@@ -20,6 +20,13 @@ public class AllyAI : MonoBehaviour {
 	void Start () {
 
 	}
+
+	public void takeDamage(int damage) {
+		Health -= damage;
+		if (Health <= 0) {
+			Destroy(this.gameObject);		
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
