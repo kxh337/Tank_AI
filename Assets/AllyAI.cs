@@ -11,7 +11,11 @@ public class AllyAI : MonoBehaviour {
 	public GameObject Projectile;
 	public GameObject Barrel;
 	public GameObject Turret;
+<<<<<<< HEAD
 	public Vector3 projectileStartPos;
+=======
+	public FloatingHealthBar healthBar;
+>>>>>>> FETCH_HEAD
 
 	public bool sighted = false;
 	public bool lowHealth = false;
@@ -20,6 +24,15 @@ public class AllyAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+	}
+	public int getHealth() {
+		return Health;
+	}
+
+	public void takeDamage(int damage) {
+		Health -= damage;
+		if (Health <= 0)
+			Destroy (this.gameObject);
 	}
 	
 	// Update is called once per frame
@@ -58,4 +71,6 @@ public class AllyAI : MonoBehaviour {
 		}
 
 	}
+
+
 }
