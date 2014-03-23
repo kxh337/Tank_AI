@@ -12,11 +12,16 @@ public class AIMovementController : MonoBehaviour {
 	 */
 	public Transform[] wheelModels;
 	private bool isMoving;
+<<<<<<< HEAD
 	public float torque;
 	public float steer;
 	public float turnTorque;
 	public float maxSpeed;
 	private float stopTime;
+=======
+	public float maxTorqueSpeed;
+	public float maxTurnSpeed;
+>>>>>>> FETCH_HEAD
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +35,7 @@ public class AIMovementController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
 		if(rigidbody.velocity.magnitude > 0){
 			isMoving = true;
 		}
@@ -87,6 +93,10 @@ public class AIMovementController : MonoBehaviour {
 		stopTime = Time.time + time;
 		foreach(WheelCollider w in wheels){
 			w.motorTorque = -torque;
+=======
+		foreach(Transform wheel in wheelModels){
+			wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
+>>>>>>> FETCH_HEAD
 		}
 	}
 }
