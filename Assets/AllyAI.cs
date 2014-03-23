@@ -11,6 +11,7 @@ public class AllyAI : MonoBehaviour {
 	public GameObject Projectile;
 	public GameObject Barrel;
 	public GameObject Turret;
+	public FloatingHealthBar healthBar;
 
 	public bool sighted = false;
 	public bool lowHealth = false;
@@ -23,6 +24,7 @@ public class AllyAI : MonoBehaviour {
 
 	public void takeDamage(int damage) {
 		Health -= damage;
+		healthBar.health(-damage);
 		if (Health <= 0) {
 			Destroy(this.gameObject);		
 		}
