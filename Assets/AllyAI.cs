@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AllyAI : MonoBehaviour {
 	public GameObject parentTank;
-	private int Health = 100;
+	private int Health = 10;
 	private double range = 2.5;
 	public GameObject target;
 	private GameObject[] Enemies;
@@ -94,9 +94,10 @@ public class AllyAI : MonoBehaviour {
 		//enemy sighted and not low health
 		else if (lowHealth && sighted) {
 			Vector3 amttorotate;
-			amttorotate = Vector3.RotateTowards (transform.forward, - target.transform.position, .01f, .01f);	
+			amttorotate = Vector3.RotateTowards (parentTank.transform.forward, -(target.transform.position - parentTank.transform.position), .01f, .01f);	
 			parentTank.transform.rotation = Quaternion.LookRotation (new Vector3 (amttorotate.x, 0f, amttorotate.z), new Vector3 (0f, 1f, 0f));
 			// flee, maybe shoot during?		
+
 		}
 	}
 }
