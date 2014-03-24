@@ -42,12 +42,15 @@ public class AllyAI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
 		Debug.DrawRay(Turret.transform.position, Turret.transform.TransformDirection(Vector3.forward)*10,Color.red);
 		if(Time.time > canShootTime){
 			isReloaded = true;
 		}
 		if (target == null)
 			sighted = false;
+=======
+>>>>>>> FETCH_HEAD
 		if (Health < 35) {
 			lowHealth = true;
 		}

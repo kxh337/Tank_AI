@@ -11,9 +11,32 @@ public class SightTrigger : MonoBehaviour {
 	void Start () {
 		
 	}
+
+	void findNewTarget() {
+		ArrayList enemies; 
+		if (Tank.gameObject.tag == "Enemy") {
+			enemies = new ArrayList (GameObject.FindGameObjectsWithTag ("Ally"));
+			enemies.Add(GameObject.FindGameObjectWithTag("Player"));
+		}
+		else {
+			enemies = new ArrayList(GameObject.FindGameObjectsWithTag("Enemy"));
+		}
+		if (enemies.Count != 0){
+			foreach (GameObject x in enemies) {
+				if (Vector3.Distance(Tank.gameObject.transform.position, x.gameObject.transform.position) < 5)
+					Tank.target = x;
+			}
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Tank.target == null && EnemyCount != 0) {
+			findNewTarget();
+		}
+		else if (Tank.target == null) {
+			Tank.sighted = false;
+		}
 	}
 	
 	void OnTriggerEnter(Collider other) {
@@ -50,13 +73,7 @@ public class SightTrigger : MonoBehaviour {
 					Debug.Log("Enemies seen:" + EnemyCount);
 				}
 				if (other.gameObject == Tank.target) {
-					ArrayList enemies = new ArrayList(GameObject.FindGameObjectsWithTag("Ally"));
-					if (enemies.Count != 0){
-						foreach (GameObject x in enemies) {
-							if (Vector3.Distance(Tank.gameObject.transform.position, x.gameObject.transform.position) < 5)
-								Tank.target = x;
-						}
-					}
+					findNewTarget();
 				}
 			}
 		}
@@ -71,13 +88,7 @@ public class SightTrigger : MonoBehaviour {
 					Debug.Log("Enemies seen:" + EnemyCount);
 				}
 				if (other.gameObject == Tank.target) {
-					ArrayList enemies = new ArrayList(GameObject.FindGameObjectsWithTag("Enemy"));
-					if (enemies.Count != 0){
-						foreach (GameObject x in enemies) {
-							if (Vector3.Distance(Tank.gameObject.transform.position, x.gameObject.transform.position) < 5)
-								Tank.target = x;
-						}
-					}
+					findNewTarget();
 				}
 			}
 		}
