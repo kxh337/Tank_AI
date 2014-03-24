@@ -17,7 +17,6 @@
 			void OnCollisionEnter(Collision other) {
 					Debug.Log("boom");
 						AOE.Explode ();
-						
 							Destroy(this.gameObject);
 				}
 		}

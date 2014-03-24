@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AOEScript : MonoBehaviour {
-	private ArrayList inArea;
+	private List<AllyAI> inArea;
 	
 	// Use this for initialization
 	void Start () {
-		inArea = new ArrayList();
+		inArea = new List<AllyAI>();
 		
 	}
 	
