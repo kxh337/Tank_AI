@@ -20,6 +20,7 @@ public class AOEScript : MonoBehaviour {
 		foreach (AllyAI x in inArea) {
 			x.takeDamage (15);
 		}
+		
 	}
 	
 	void OnTriggerEnter(Collider other) {
