@@ -22,9 +22,12 @@ public class AllyAI : MonoBehaviour {
 	public bool inRange = false;
 	public bool aimed = false;
 	public bool isReloaded = true;
+	public bool isPlayer;
+	public Transform barrelTip;
 
-	private float canShootTime;
+	public float canShootTime;
 	private GameObject cloneProj;
+
 
 
 	// Use this for initialization
@@ -43,7 +46,7 @@ public class AllyAI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Debug.DrawRay(Turret.transform.position, Turret.transform.TransformDirection(Vector3.forward)*10,Color.red);
+		Debug.DrawRay(barrelTip.transform.position, barrelTip.transform.TransformDirection(Vector3.forward)*(float)range,Color.red);
 		if(Time.time > canShootTime){
 			isReloaded = true;
 		}
@@ -76,21 +79,21 @@ public class AllyAI : MonoBehaviour {
 			if (inRange){
 				// attack
 				RaycastHit hit;
-				Ray aim = new Ray(Barrel.transform.position, Turret.transform.TransformDirection(Vector3.forward));
 
 
-				Physics.Raycast(aim,out hit,10);
-				Debug.Log(hit.transform.gameObject.tag);
-				if((hit.transform.gameObject.tag == "Enemy")){
+				Physics.Raycast(barrelTip.transform.position, barrelTip.transform.forward,out hit,(float)range);
+
+				if((hit.transform.gameObject.tag == "Enemy" &&parentTank.tag =="Ally")||((hit.transform.gameObject.tag == "Ally"||hit.transform.gameObject.tag =="Player") &&parentTank.tag =="Enemy")){
 					if(isReloaded == true){
 						Debug.Log("shot");
-						cloneProj= (GameObject)Instantiate(Projectile,Turret.transform.position+instantOffset,Turret.transform.rotation);
+						cloneProj= (GameObject)Instantiate(Projectile,barrelTip.transform.position+instantOffset,Turret.transform.rotation);
 						Rigidbody projRigid = cloneProj.rigidbody;
 						projRigid.AddForce(Turret.transform.forward*shotSpeed);
 						isReloaded = false;
 						canShootTime = Time.time + reloadTime;
 					}
 				}
+
 				if (Vector3.Distance(this.gameObject.transform.position, this.target.transform.position) > range){
 					inRange = false;
 				}

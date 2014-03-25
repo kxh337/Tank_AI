@@ -17,6 +17,7 @@ public class AIMovementController : MonoBehaviour {
 	public float turnTorque;
 	public float maxSpeed;
 	public float stopTime;
+
 	// Use this for initialization
 	void Start () {
 		isMoving = false;
