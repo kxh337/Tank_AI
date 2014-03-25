@@ -17,6 +17,12 @@ public class AIMovementController : MonoBehaviour {
 	public float turnTorque;
 	public float maxSpeed;
 	public float stopTime;
+	public bool cmdFinished = true;
+
+
+	public bool getCmdFinished(){
+		return cmdFinished;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +33,7 @@ public class AIMovementController : MonoBehaviour {
 
 
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -45,6 +52,7 @@ public class AIMovementController : MonoBehaviour {
 			}
 		}
 		if(Time.time > stopTime){
+			cmdFinished = true;
 			wheels[0].steerAngle = 0;
 			wheels[2].steerAngle = 0;
 			foreach(WheelCollider w in wheels){
@@ -56,6 +64,7 @@ public class AIMovementController : MonoBehaviour {
 
 	public void moveForward(float time){
 		stopTime = Time.time + time;
+		cmdFinished = false;
 			foreach(WheelCollider w in wheels){
 				w.motorTorque = torque;
 			}
@@ -63,6 +72,7 @@ public class AIMovementController : MonoBehaviour {
 
 	public void turnLeft(float time){
 		stopTime = Time.time + time;
+		cmdFinished = false;
 		wheels[0].steerAngle = -steer;
 		//wheels[1].motorTorque -= steer;
 		wheels[2].steerAngle = -steer;
@@ -73,6 +83,7 @@ public class AIMovementController : MonoBehaviour {
 	}
 	public void turnRight(float time){
 		stopTime = Time.time + time;
+		cmdFinished = false;
 		wheels[0].steerAngle = steer;
 		//wheels[1].motorTorque += steer;
 		wheels[2].steerAngle = steer;
@@ -85,6 +96,7 @@ public class AIMovementController : MonoBehaviour {
 
 	public void moveBackwards(float time){
 		stopTime = Time.time + time;
+		cmdFinished = false;
 		foreach(WheelCollider w in wheels){
 			w.motorTorque = -torque;
 		foreach(Transform wheel in wheelModels){

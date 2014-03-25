@@ -107,7 +107,9 @@ public class AllyAI : MonoBehaviour {
 				Vector3 bodytorotate;
 				bodytorotate = Vector3.RotateTowards (parentTank.transform.forward, (target.transform.position - parentTank.transform.position), .01f, .01f);	
 				parentTank.transform.rotation = Quaternion.LookRotation (new Vector3 (bodytorotate.x, 0f, bodytorotate.z), new Vector3 (0f, 1f, 0f));
-				parentTank.GetComponent<AIMovementController>().moveForward(0.001f);
+				if( parentTank.GetComponent<AIMovementController>().getCmdFinished() == true){
+					parentTank.GetComponent<AIMovementController>().moveForward(0.0001f);
+				}
 			}
 		}
 
