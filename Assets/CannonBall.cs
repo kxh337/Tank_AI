@@ -17,7 +17,6 @@ public class CannonBall : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision other) {
 		Debug.Log("boom");
-		audio.PlayOneShot (Explosion);
 		AOE.Explode ();
 		Destroy(this.gameObject);
 	}
