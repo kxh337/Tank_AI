@@ -23,7 +23,7 @@ public class SightTrigger : MonoBehaviour {
 		}
 		if (enemies.Count != 0){
 			foreach (GameObject x in enemies) {
-				if (Vector3.Distance(Tank.gameObject.transform.position, x.gameObject.transform.position) < 5)
+				if (Vector3.Distance(Tank.gameObject.transform.position, x.gameObject.transform.position) < 20)
 					Tank.target = x;
 			}
 		}
@@ -47,6 +47,8 @@ public class SightTrigger : MonoBehaviour {
 					if (other.gameObject.CompareTag("Player")) audio.PlayOneShot(enemySeePlayer);
 				}
 				EnemyCount++;
+				if (Tank.sighted == false)
+					Tank.parentTank.GetComponent<AIMovementController>().stopTime = Time.time;
 				Tank.sighted = true;
 				Debug.Log("Enemies seen:" + EnemyCount);
 			}

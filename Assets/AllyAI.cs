@@ -3,8 +3,8 @@ using System.Collections;
 
 public class AllyAI : MonoBehaviour {
 	public GameObject parentTank;
-	private int Health = 10;
-	private double range = 2.5;
+	private int Health = 100;
+	private double range = 9;
 	public GameObject target;
 	private GameObject[] Enemies;
 	public GameObject[] Wheels; // 0 and 1 should be front, 2 and 3 back.
@@ -15,6 +15,7 @@ public class AllyAI : MonoBehaviour {
 	public float reloadTime;
 	public float shotSpeed;
 	public Vector3 instantOffset;
+	public float nextWander = 0;
 
 	public bool sighted = false;
 	public bool lowHealth = false;
@@ -51,7 +52,18 @@ public class AllyAI : MonoBehaviour {
 		if (Health < 35) {
 			lowHealth = true;
 		}
-		if (!sighted) {
+		if (!sighted && Time.time > nextWander) {
+			float choice = Random.Range(0f,1f);
+			if (choice < 0.15f) {
+				parentTank.GetComponent<AIMovementController>().turnLeft(1);
+			}
+			else if (choice > .85f) {
+				parentTank.GetComponent<AIMovementController>().turnRight(1);
+				Debug.Log ("ROLLOUT");
+			}
+			else 
+				parentTank.GetComponent<AIMovementController>().moveForward(1);
+			nextWander = Time.time + 1;
 			// wander	
 			// Enemy is seen in the SightTrigger script
 		}
@@ -88,6 +100,10 @@ public class AllyAI : MonoBehaviour {
 				if (Vector3.Distance(this.gameObject.transform.position, this.target.transform.position) < range){
 					inRange = true;
 				}
+				Vector3 bodytorotate;
+				bodytorotate = Vector3.RotateTowards (parentTank.transform.forward, (target.transform.position - parentTank.transform.position), .01f, .01f);	
+				parentTank.transform.rotation = Quaternion.LookRotation (new Vector3 (bodytorotate.x, 0f, bodytorotate.z), new Vector3 (0f, 1f, 0f));
+				parentTank.GetComponent<AIMovementController>().moveForward(0.001f);
 			}
 		}
 
@@ -96,6 +112,7 @@ public class AllyAI : MonoBehaviour {
 			Vector3 amttorotate;
 			amttorotate = Vector3.RotateTowards (parentTank.transform.forward, -(target.transform.position - parentTank.transform.position), .01f, .01f);	
 			parentTank.transform.rotation = Quaternion.LookRotation (new Vector3 (amttorotate.x, 0f, amttorotate.z), new Vector3 (0f, 1f, 0f));
+			parentTank.GetComponent<AIMovementController>().moveForward(0.001f);
 			// flee, maybe shoot during?		
 
 		}
