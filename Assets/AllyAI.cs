@@ -81,7 +81,7 @@ public class AllyAI : MonoBehaviour {
 				RaycastHit hit;
 
 
-				Physics.Raycast(barrelTip.transform.position, barrelTip.transform.forward,out hit,(float)range);
+				if(Physics.Raycast(barrelTip.transform.position, barrelTip.transform.forward,out hit,(float)range)){
 
 				if((hit.transform.gameObject.tag == "Enemy" &&parentTank.tag =="Ally")||((hit.transform.gameObject.tag == "Ally"||hit.transform.gameObject.tag =="Player") &&parentTank.tag =="Enemy")){
 					if(isReloaded == true){
@@ -92,6 +92,7 @@ public class AllyAI : MonoBehaviour {
 						isReloaded = false;
 						canShootTime = Time.time + reloadTime;
 					}
+				}
 				}
 
 				if (Vector3.Distance(this.gameObject.transform.position, this.target.transform.position) > range){
