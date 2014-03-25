@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AllyAI : MonoBehaviour {
 	public GameObject parentTank;
-	private int Health = 100;
+	public int Health = 100;
 	private double range = 9;
 	public GameObject target;
 	private GameObject[] Enemies;
