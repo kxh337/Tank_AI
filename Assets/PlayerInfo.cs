@@ -5,7 +5,7 @@ public class PlayerInfo : AllyAI {
 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	public void shoot(){
 		if(isPlayer && isReloaded == true){
