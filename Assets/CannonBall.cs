@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CannonBall : MonoBehaviour {
 	public AOEScript AOE;
-	public AudioClip Explosion;
+	public AudioClip ExplosionSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -17,6 +17,7 @@ public class CannonBall : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision other) {
 		Debug.Log("boom");
+		
 		AOE.Explode ();
 		Destroy(this.gameObject);
 	}
