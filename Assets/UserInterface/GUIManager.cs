@@ -2,10 +2,9 @@
 using System.Collections;
 
 public class GUIManager : MonoBehaviour {
-	public GUIText enemyCountText, allyCountText, victoryText;
+	public GUIText enemyCountText, allyCountText;
 	private int enemyCount;
 	private int allyCount;
-	public AudioClip victorySound;
 	
 	// Use this for initialization
 	void Start () {
@@ -20,13 +19,7 @@ public class GUIManager : MonoBehaviour {
 		allyCount = GameObject.FindGameObjectsWithTag ("Ally").Length / 2;
 		enemyCountText.text = enemyCount.ToString ();
 		allyCountText.text = allyCount.ToString ();
-		
-		if (enemyCount == 0) {
 
-			victoryText.text = "Victory";
-			audio.PlayOneShot(victorySound);
-		}
-		
 	}
 	
 }
