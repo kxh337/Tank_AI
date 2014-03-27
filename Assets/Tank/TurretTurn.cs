@@ -11,6 +11,7 @@ public class TurretTurn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Quaternion amttorotate;
+		//slowly rotates the turret to point in the same direction as the Main camera
 		amttorotate = Quaternion.Lerp(transform.rotation,cameraholder.transform.rotation,Time.deltaTime);
 		transform.rotation = amttorotate;
 	}

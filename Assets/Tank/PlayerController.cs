@@ -32,19 +32,24 @@ public class PlayerController : MonoBehaviour {
 		else{
 			isMoving = false;
 		}
+
 		if(rigidbody.velocity.magnitude > maxSpeed){
 			rigidbody.velocity *= maxSpeed / rigidbody.velocity.magnitude;
 		}
+
 		float power = Input.GetAxis("Vertical") * maxTorqueSpeed * Time.deltaTime * 250;
 		float steer = Input.GetAxis("Horizontal") * maxTurnSpeed;
+		//used to move the tank based on the input
 		foreach(WheelCollider w in wheels){
 			w.motorTorque = power;
 		}
+		//used to turn the tank like a car turns
 		wheels[0].steerAngle = steer;
 		//wheels[1].steerAngle += steer;
 		wheels[2].steerAngle = steer;
 		//wheels[3].steerAngle += steer;
 
+		//rotates the models to make it seem like the tank is moving
 		foreach(Transform wheel in wheelModels){
 			wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
 		}

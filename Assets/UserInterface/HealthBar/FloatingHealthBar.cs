@@ -20,6 +20,7 @@ public class FloatingHealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//turns the health bar to face the camera
 		gameObject.transform.LookAt(Camera.main.transform.position);
 		//test - gives 15 damage with every left click
 		//		 heals 10 damage with every right click
@@ -35,7 +36,7 @@ public class FloatingHealthBar : MonoBehaviour {
 		*/
 	}
 
-	// use negative number for damage amount!
+	// use negative number for damage amount! This adjusts the health bar based on the damage so the green part reperesents the remeaining health
 	public void health(int adj) {
 		currentHealth += adj;
 		if (currentHealth <= 0) {

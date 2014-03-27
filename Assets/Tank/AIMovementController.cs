@@ -19,7 +19,7 @@ public class AIMovementController : MonoBehaviour {
 	public float stopTime;
 	public bool cmdFinished = true;
 
-
+	// returns if the current movement command is finished
 	public bool getCmdFinished(){
 		return cmdFinished;
 	}
@@ -27,6 +27,7 @@ public class AIMovementController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		isMoving = false;
+		//stops the wheels
 		foreach(WheelCollider w in wheels){
 			w.brakeTorque = 0; 	
 		}
@@ -43,9 +44,11 @@ public class AIMovementController : MonoBehaviour {
 		else{
 			isMoving = false;
 		}
+		//limits the speed of the tank
 		if(rigidbody.velocity.magnitude > maxSpeed){
 			rigidbody.velocity *= maxSpeed / rigidbody.velocity.magnitude;
 		}
+		//rotates the wheel models to make the tank look like it is moving
 		if(isMoving == true){
 			foreach(Transform wheel in wheelModels){
 				wheel.Rotate(Vector3.down,rigidbody.velocity.x*Time.deltaTime*100);
@@ -61,7 +64,9 @@ public class AIMovementController : MonoBehaviour {
 		}
 
 	}
-
+	/*moves the tank forward for float time
+	 * param time- time for the tank to move forward
+	 */
 	public void moveForward(float time){
 		stopTime = Time.time + time;
 		cmdFinished = false;
@@ -69,7 +74,9 @@ public class AIMovementController : MonoBehaviour {
 				w.motorTorque = torque;
 			}
 	}
-
+	/*turns the tank to the left for float time
+	 * param time- time for the tank to turn left
+	 */
 	public void turnLeft(float time){
 		stopTime = Time.time + time;
 		cmdFinished = false;
@@ -81,6 +88,9 @@ public class AIMovementController : MonoBehaviour {
 			w.motorTorque = turnTorque;
 		}
 	}
+	/*turns the tank to the right for float time
+	 * param time- time for the tank to turn right
+	 */
 	public void turnRight(float time){
 		stopTime = Time.time + time;
 		cmdFinished = false;
@@ -93,7 +103,9 @@ public class AIMovementController : MonoBehaviour {
 		}
 	}
 
-
+	/*moves the tank backwards for float time
+	 * param time- time for the tank to move backwards
+	 */
 	public void moveBackwards(float time){
 		stopTime = Time.time + time;
 		cmdFinished = false;
