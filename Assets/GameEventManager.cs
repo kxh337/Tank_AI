@@ -7,6 +7,7 @@ public class GameEventManager : MonoBehaviour {
 	public static int enemies;
 	public static int allies;
 	public static int difficulty = 1;
+	public AudioClip victory;
 
 	public static void playerDeath() {
 		loseCon = true;
@@ -34,6 +35,7 @@ public class GameEventManager : MonoBehaviour {
 			}
 		}
 		if (winCon) {
+			audio.PlayOneShot(victory);
 			if (GUI.Button(new Rect(10, 10, 150, 100), "You Won!\nReturn to Main Menu?")) {
 				winCon = false;
 				Application.LoadLevel (0);

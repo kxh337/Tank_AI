@@ -11,12 +11,13 @@ public class GUIManager : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
+	// displays remaining number of allies and enemies on the top-left edge of the screen
+	// enemy count text is red, ally count is blue (these are set up using prefab settings, not through script)
 	void Update () {
-		
-		//need to divide by 2 because both "Enemy Tank" object and its child object "Body" are tagged as "Enemy"
+		// need to divide by 2 because both "Enemy Tank" parent object and child object "Body" are tagged as "Enemy"
 		enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length / 2; 
 		allyCount = GameObject.FindGameObjectsWithTag ("Ally").Length / 2;
+
 		enemyCountText.text = enemyCount.ToString ();
 		allyCountText.text = allyCount.ToString ();
 

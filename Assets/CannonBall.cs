@@ -4,7 +4,8 @@ using System.Collections;
 public class CannonBall : MonoBehaviour {
 	public AOEScript AOE;
 	public AudioClip ExplosionSound;
-	
+	public GameObject explosionSprite;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,8 +18,9 @@ public class CannonBall : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision other) {
 		Debug.Log("boom");
-		
 		AOE.Explode ();
 		Destroy(this.gameObject);
+		GameObject explClone = (GameObject)Instantiate(explosionSprite,gameObject.transform.position,Camera.main.transform.rotation);
+		Destroy (explClone, 2.0f);
 	}
 }

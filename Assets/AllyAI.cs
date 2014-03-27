@@ -44,6 +44,7 @@ public class AllyAI : MonoBehaviour {
 			GameEventManager.tankDeath(this.gameObject.tag);
 			GameObject explClone = (GameObject)Instantiate(explosion,gameObject.transform.position,Camera.main.transform.rotation);
 			Destroy(parentTank);		
+			Destroy(explClone, 1.5f);
 		}
 	}
 
