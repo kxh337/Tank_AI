@@ -24,6 +24,7 @@ public class AllyAI : MonoBehaviour {
 	public bool isReloaded = true;
 	public bool isPlayer;
 	public Transform barrelTip;
+	public GameObject explosion;
 
 	public float canShootTime;
 	private GameObject cloneProj;
@@ -40,6 +41,7 @@ public class AllyAI : MonoBehaviour {
 		healthBar.health(-damage);
 		if (Health <= 0) {
 			GameEventManager.tankDeath(this.gameObject.tag);
+			GameObject explClone = (GameObject)Instantiate(explosion,gameObject.transform.position,Camera.main.transform.rotation);
 			Destroy(parentTank);		
 		}
 	}
