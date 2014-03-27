@@ -16,7 +16,7 @@ public class AllyAI : MonoBehaviour {
 	public float shotSpeed;
 	public Vector3 instantOffset;
 	public float nextWander = 0;
-
+	public AudioClip shotSound;
 	public bool sighted = false;
 	public bool lowHealth = false;
 	public bool inRange = false;
@@ -34,6 +34,7 @@ public class AllyAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Health = 100 + (GameEventManager.difficulty - 1) * 100;
+		audio.clip = shotSound;
 	}
 
 	public void takeDamage(int damage) {
@@ -92,6 +93,7 @@ public class AllyAI : MonoBehaviour {
 						cloneProj= (GameObject)Instantiate(Projectile,barrelTip.transform.position+instantOffset,Turret.transform.rotation);
 						Rigidbody projRigid = cloneProj.rigidbody;
 						projRigid.AddForce(Turret.transform.forward*shotSpeed);
+							audio.Play();
 						isReloaded = false;
 						canShootTime = Time.time + reloadTime;
 					}

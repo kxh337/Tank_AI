@@ -5,7 +5,7 @@ public class PlayerInfo : AllyAI {
 
 	// Use this for initialization
 	void Start () {
-		
+		audio.clip = shotSound;
 	}
 
 	public void takeDamage(int damage) {
@@ -23,6 +23,7 @@ public class PlayerInfo : AllyAI {
 				Debug.Log("PLayer shot");
 				cloneProj = (GameObject)Instantiate(Projectile,barrelTip.transform.position + instantOffset,Barrel.transform.rotation);
 				cloneProj.rigidbody.AddForce(Turret.transform.right*shotSpeed);
+				audio.Play ();
 				isReloaded = false;
 				canShootTime = Time.time + reloadTime;
 			}
