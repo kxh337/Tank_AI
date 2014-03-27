@@ -7,6 +7,15 @@ public class PlayerInfo : AllyAI {
 	void Start () {
 		
 	}
+
+	public void takeDamage(int damage) {
+		Health -= damage;
+		healthBar.health(-damage);
+		if (Health <= 0) {
+			GameEventManager.tankDeath(this.gameObject.tag);
+		}
+	}
+
 	public void shoot(){
 		if(isPlayer && isReloaded == true){
 			if(Input.GetMouseButtonDown(0)){

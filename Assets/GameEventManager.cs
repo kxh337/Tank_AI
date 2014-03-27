@@ -18,10 +18,10 @@ public class GameEventManager : MonoBehaviour {
 		}
 		else
 			allies--;
-		if (allies <= 0) {
+		if (allies <= 0 && !winCon) {
 			GameEventManager.loseCon = true;
 		}
-		if (enemies <= 0) {
+		if (enemies <= 0 && !loseCon) {
 			GameEventManager.winCon = true;
 		}
 	}
@@ -63,8 +63,8 @@ public class GameEventManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		enemies = 1;
-		allies = 1;
+		enemies = 4;
+		allies = 3;
 	
 	}
 	
