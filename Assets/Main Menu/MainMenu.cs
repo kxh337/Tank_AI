@@ -3,6 +3,10 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 	private RaycastHit hitInfo;
+	public GameObject Turret;
+	public GameObject Projectile;
+	public Transform barrelTip;
+	public float shotSpeed;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,8 +21,11 @@ public class MainMenu : MonoBehaviour {
 				if(hitInfo.collider.name == "Play Game"){
 					Application.LoadLevel(1);
 				}
-				if(hitInfo.collider.name =="Ally Tank"){
+				if(hitInfo.collider.gameObject.tag =="Ally"){
 					//shoot
+					GameObject cloneProj= (GameObject)Instantiate(Projectile,barrelTip.transform.position,Turret.transform.rotation);
+					Rigidbody projRigid = cloneProj.rigidbody;
+					projRigid.AddForce(Turret.transform.forward*shotSpeed);
 				}
 
 			} 
