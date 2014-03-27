@@ -14,8 +14,8 @@ public class FloatingHealthBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		this.transform.localPosition = new Vector3 (0, 0.5f, 0);
-		currentHealth = 100f;
-		maxHealth = 100f;
+		currentHealth = 100 + (GameEventManager.difficulty - 1) * 100;
+		maxHealth = 100 + (GameEventManager.difficulty - 1) * 100;
 	}
 	
 	// Update is called once per frame

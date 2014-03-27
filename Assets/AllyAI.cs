@@ -32,13 +32,14 @@ public class AllyAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		Health = 100 + (GameEventManager.difficulty - 1) * 100;
 	}
 
 	public void takeDamage(int damage) {
 		Health -= damage;
 		healthBar.health(-damage);
 		if (Health <= 0) {
+			GameEventManager.tankDeath(this.gameObject.tag);
 			Destroy(parentTank);		
 		}
 	}
