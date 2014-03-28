@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/*
+ * handles collision behavior for the cannonball
+ */
 public class CannonBall : MonoBehaviour {
-	public AOEScript AOE;
-	public AudioClip ExplosionSound;
-	public GameObject explosionSprite;
+	public AOEScript AOE; // script to handle AOE damage
+	public AudioClip ExplosionSound; // sound of explosion
+	public GameObject explosionSprite; // explosion visual
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +19,11 @@ public class CannonBall : MonoBehaviour {
 	void Update () {
 		
 	}
-	
+
+	/*
+	 * handles impact-triggered explosion
+	 * @param other the object being hit by the cannonball
+	 */
 	void OnCollisionEnter(Collision other) {
 		Debug.Log("boom");
 		AOE.Explode ();

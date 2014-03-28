@@ -1,21 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+ * Info class for player tank, an extension of AllyAI to handle AOE damage from the cannonball
+ */
 public class PlayerInfo : AllyAI {
 	public LineRenderer predictionLine;
 	// Use this for initialization
 	void Start () {
 		audio.clip = shotSound;
 	}
-	
+
+	/*
+	 * used to assign damage to a tank
+	 * @param damage the amount of damage taken
+	 */
 	public void takeDamage(int damage) {
 		Health -= damage;
 		healthBar.health(-damage);
 		if (Health <= 0) {
-			GameEventManager.tankDeath(this.gameObject.tag);
+			GameEventManager.playerDeath();
 		}
 	}
-	
+
+	/*
+	 * shoots if the player can
+	 */
 	public void shoot(){
 		if(isPlayer && isReloaded == true){
 			if(Input.GetMouseButtonDown(0)){
@@ -31,13 +41,17 @@ public class PlayerInfo : AllyAI {
 		}
 	}
 	// Update is called once per frame
-	void Update () {
+	void Update () { // handles the reloading and aiming line
 		UpdatePredictionLine ();
 		if(Time.time > canShootTime){
 			isReloaded = true;
 		}
 		shoot();
 	}
+
+	/*
+	 * keeps the aiming line inline with the turret angle/position
+	 */
 	void UpdatePredictionLine() {
 		//sets up the number of secttions the line renderer is split up into
 		predictionLine.SetVertexCount(180);

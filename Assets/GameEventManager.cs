@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameEventManager : MonoBehaviour {
-	private static bool loseCon = false;
-	private static bool winCon = false;
-	public static int enemies;
-	public static int allies;
-	public static int difficulty = 1;
-	public AudioClip victory;
+/*
+ * handles game events including deaths, winning, and losing
+ * also the only way to change difficulty
+ */
 
+public class GameEventManager : MonoBehaviour {
+	private static bool loseCon = false; // if the game is lost
+	private static bool winCon = false; // if the game is won
+	public static int enemies; // number of enemies
+	public static int allies; // number of allies
+	public static int difficulty = 1; // difficulty setting
+	public AudioClip victory; // win sound
+
+	/*
+	 * forces game loss if palyer dies
+	 */
 	public static void playerDeath() {
 		loseCon = true;
 	}
 
+	/*
+	 * notes AI death and checks win/lose conditions
+	 * @param team the tag of the tank that dies
+	 */
 	public static void tankDeath(string team) {
 		if (team.Equals ("Enemy")) {
 			enemies--;
@@ -27,6 +39,9 @@ public class GameEventManager : MonoBehaviour {
 		}
 	}
 
+	/*
+	 * buttons for the win/lose screens
+	 */
 	void OnGUI() {
 		if (loseCon) {
 			if (GUI.Button(new Rect(10, 10, 150, 100), "You Lost!\nReturn to Main Menu?")) {
@@ -63,7 +78,7 @@ public class GameEventManager : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
+	// initializes team sizes, currently no need for dynamic counting
 	void Start () {
 		enemies = 4;
 		allies = 3;
